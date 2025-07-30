@@ -1,15 +1,15 @@
 const db = require('../models');
 
-const User = db.User;
+const Product = db.Product;
 
 
 exports.getAll = async (req, res) => {
 
   try {
 
-    const users = await User.findAll();
+    const products = await Product.findAll();
 
-    res.json(users);
+    res.json(products);
 
   } catch (err) {
 
@@ -24,11 +24,11 @@ exports.getById = async (req, res) => {
 
   try {
 
-    const user = await User.findByPk(req.params.id);
+    const product = await Product.findByPk(req.params.id);
 
-    if (!user) return res.status(404).json({ error: 'User tidak ditemukan' });
+    if (!product) return res.status(404).json({ error: 'Produk tidak ditemukan' });
 
-    res.json(user);
+    res.json(product);
 
   } catch (err) {
 
@@ -43,12 +43,9 @@ exports.create = async (req, res) => {
 
   try {
 
-    const user = await User.create(req.body);
+    const product = await Product.create(req.body);
 
-
-        
-
-    res.status(201).json(user);
+    res.status(201).json(product);
 
   } catch (err) {
 
@@ -63,15 +60,15 @@ exports.update = async (req, res) => {
 
   try {
 
-    const [updated] = await User.update(req.body, {
+    const [updated] = await Product.update(req.body, {
 
       where: { id: req.params.id }
 
     });
 
-    if (updated === 0) return res.status(404).json({ error: 'User tidak ditemukan' });
+    if (updated === 0) return res.status(404).json({ error: 'Produk tidak ditemukan' });
 
-    res.json({ message: 'User diperbarui' });
+    res.json({ message: 'Produk diperbarui' });
 
   } catch (err) {
 
@@ -86,15 +83,15 @@ exports.remove = async (req, res) => {
 
   try {
 
-    const deleted = await User.destroy({
+    const deleted = await Product.destroy({
 
       where: { id: req.params.id }
 
     });
 
-    if (deleted === 0) return res.status(404).json({ error: 'User tidak ditemukan' });
+    if (deleted === 0) return res.status(404).json({ error: 'Produk tidak ditemukan' });
 
-    res.json({ message: 'User dihapus' });
+    res.json({ message: 'Produk dihapus' });
 
   } catch (err) {
 
@@ -103,6 +100,3 @@ exports.remove = async (req, res) => {
   }
 
 };
-
-
-

@@ -15,7 +15,17 @@ app.get('/', (req, res) => res.send('API aktif!'));
 
 
 // tambahkan routing kamu dibawah sini
+const userRoutes = require('./routes/user.routes');
 
+const productRoutes = require('./routes/product.routes');
+
+const transactionRoutes = require('./routes/transaction.routes');
+
+app.use('/api/transactions', transactionRoutes);
+
+
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 
 // Koneksi ke database
